@@ -1,0 +1,4 @@
+C:/Users/AJ/Desktop/HerzogTTS/Vocoder/Pretrained/g_02500000 filter=lfs diff=lfs merge=lfs -text
+C:/Users/AJ/Desktop/HerzogTTS/Model/Werner_Herzog/Werner_Herzog filter=lfs diff=lfs merge=lfs -text
+/Model/Werner_Herzog/Werner_Herzog filter=lfs diff=lfs merge=lfs -text
+/Vocoder/Pretrained/g_02500000 filter=lfs diff=lfs merge=lfs -text
