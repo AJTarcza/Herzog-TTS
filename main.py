@@ -73,6 +73,9 @@ async def on_message(message):
 async def on_ready():
     assert os.path.isfile(MODEL), "Model not found"
     assert os.path.isfile(VOCODER_MODEL), "vocoder model not found"
+    
+    if(not os.path.isdir(AUDIO_PATH)):
+        os.mkdir(AUDIO_PATH)
 
     global model
     global vocoder
