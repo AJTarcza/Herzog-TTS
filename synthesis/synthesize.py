@@ -4,6 +4,7 @@ import numpy as np
 from scipy.io.wavfile import write
 from os.path import dirname, abspath
 import sys
+import time
 
 import nltk
 
@@ -104,6 +105,10 @@ def synthesize(
     AssertionError
         If audio_path is given without a vocoder
     """
+    print("Synthesizing audio...")
+    
+    start_time = time.time()
+ 
     if audio_path:
         assert vocoder, "Missing vocoder"
 
@@ -142,4 +147,8 @@ def synthesize(
         if audio_path:
             audio = vocoder.generate_audio(mel_outputs_postnet)
             write(audio_path, sample_rate, audio)
+            
+    end_time = time.time()
+    
+    print("Synthesis completed in %s second(s)" % (end_time - start_time))
 
