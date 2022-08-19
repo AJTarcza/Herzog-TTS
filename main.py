@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # Constants
 HOME = os.path.expanduser("~")
-APP_PATH = HOME + "\Desktop\HerzogTTS"
+APP_PATH = HOME + "\Desktop\Herzog-TTS"
 MODEL = APP_PATH + "\Model\Werner_Herzog\Werner_Herzog"
 VOCODER_PATH = APP_PATH + "\Vocoder\Pretrained"
 VOCODER_MODEL = VOCODER_PATH + "\g_02500000"
