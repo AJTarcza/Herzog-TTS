@@ -6,12 +6,11 @@ from dotenv import load_dotenv
 
 # Constants
 HOME = os.path.expanduser("~")
-APP_PATH = HOME + "\Desktop\Herzog-TTS"
-MODEL = APP_PATH + "\Model\Werner_Herzog\Werner_Herzog"
-VOCODER_PATH = APP_PATH + "\Vocoder\Pretrained"
-VOCODER_MODEL = VOCODER_PATH + "\g_02500000"
-VOCODER_CONFIG = VOCODER_PATH + "\config.json"
-AUDIO_PATH = APP_PATH + "\Audio"
+APP_PATH = os.path.join(HOME, "Desktop", "Herzog-TTS")
+MODEL = os.path.join(APP_PATH, "Model", "Werner_Herzog", "Werner_Herzog")
+VOCODER_MODEL = os.path.join(APP_PATH, "Vocoder", "Pretrained", "g_02500000")
+VOCODER_CONFIG = os.path.join(APP_PATH, "Vocoder", "Pretrained", "config.json")
+AUDIO_PATH = os.path.join(APP_PATH, "Audio")
 
 model = None
 vocoder = None
