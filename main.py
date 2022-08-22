@@ -3,6 +3,7 @@ import os
 import discord
 from time import time
 from dotenv import load_dotenv
+from string import punctuation as punct
 
 # Constants
 HOME = os.path.expanduser("~")
@@ -41,6 +42,10 @@ async def on_message(message):
     if(text.isspace() or text.lower() == PREFIX.lower()):
         await channel.send("Error! Text is empty")
         return
+       
+    # If the text didn't end with punctuation then just add a period
+    if(text[-1] not in punct):
+        text += '.'
     
     # Send an acknowledgement message to show that the bot is actually doing something
     ack_msg = await channel.send("Generating audio...")
@@ -84,15 +89,18 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+    # Make sure the models exist
     assert os.path.isfile(MODEL), "Model not found"
     assert os.path.isfile(VOCODER_MODEL), "vocoder model not found"
     
+    # Create the Audio directory if it doesn't already exist
     if(not os.path.isdir(AUDIO_PATH)):
         os.mkdir(AUDIO_PATH)
 
     global model
     global vocoder
     
+    # Load the models
     model = load_model(MODEL)
     vocoder = Hifigan(VOCODER_MODEL, VOCODER_CONFIG)
 
