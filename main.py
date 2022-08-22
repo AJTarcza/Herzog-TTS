@@ -1,7 +1,7 @@
 from synthesis.synthesize import *
 import os
 import discord
-import time
+from time import time
 from dotenv import load_dotenv
 
 # Constants
@@ -12,50 +12,64 @@ VOCODER_MODEL = os.path.join(APP_PATH, "Vocoder", "Pretrained", "g_02500000")
 VOCODER_CONFIG = os.path.join(APP_PATH, "Vocoder", "Pretrained", "config.json")
 AUDIO_PATH = os.path.join(APP_PATH, "Audio")
 
-model = None
-vocoder = None
-
-# Read environment variables
+# Environment variables
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 PREFIX = os.getenv('COMMAND_PREFIX')
+
+# Globals
+model = None
+vocoder = None
 
 client = discord.Client()
 
 @client.event
 async def on_message(message):
     tokens = message.content.split()
-
+    
     # Ignore the message if it isn't relevant
-    if(message.author.bot or tokens[0].lower() != PREFIX):
+    if(message.author.bot or (message.guild and tokens[0].lower() != PREFIX.lower())):
         return
-       
+  
+    # Strip the prefix from the message
+    text = message.content.replace(PREFIX + " ", '')
+    
     # Channel the message was sent from
     channel = message.channel
     
+    # Check if text for synthesis is empty
+    if(text.isspace() or text.lower() == PREFIX.lower()):
+        await channel.send("Error! Text is empty")
+        return
+    
     # Send an acknowledgement message to show that the bot is actually doing something
     ack_msg = await channel.send("Generating audio...")
-        
-    # Strip the prefix from the message
-    text = message.content.replace(tokens[0] + " ", '')
     
     # Audio file path and name
-    audio_file = AUDIO_PATH + "/%s.wav" % (time.time() * 1000)
+    audio_file = AUDIO_PATH + "/%s.wav" % (time() * 1000)
     
     # Run the synthesizer
-    synthesize(
-        model=model,
-        text=text,
-        audio_path=audio_file,
-        vocoder=vocoder,
-        split_text=(True if len(text) >= 160 else False)
-    )
+    try:
+        synthesize(
+            model=model,
+            text=text,
+            audio_path=audio_file,
+            vocoder=vocoder,
+            split_text=(True if len(text) >= 160 else False)
+        )
+    except Exception as e:
+        print("Error synthesizing voice")
+        await ack_msg.delete()
+        await channel.send(e)
+        return
     
     # Create the file object for messaging
     try:
         file = discord.File(audio_file)
     except:
         print("Error creating file")
+        await ack_msg.delete()
+        await channel.send("Error creating file")
         return
        
     # Remove the acknowledgement message to prevent clutter

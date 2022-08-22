@@ -4,7 +4,7 @@ import numpy as np
 from scipy.io.wavfile import write
 from os.path import dirname, abspath
 import sys
-import time
+from time import time
 
 import nltk
 
@@ -107,7 +107,7 @@ def synthesize(
     """
     print("Synthesizing audio...")
     
-    start_time = time.time()
+    start_time = time()
  
     if audio_path:
         assert vocoder, "Missing vocoder"
@@ -148,7 +148,7 @@ def synthesize(
             audio = vocoder.generate_audio(mel_outputs_postnet)
             write(audio_path, sample_rate, audio)
             
-    end_time = time.time()
+    end_time = time()
     
     print("Synthesis completed in %s second(s)" % (end_time - start_time))
 
