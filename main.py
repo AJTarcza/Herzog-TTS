@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 from string import punctuation as punct
 
 # Constants
-HOME = os.path.expanduser("~")
-APP_PATH = os.path.join(HOME, "Desktop", "Herzog-TTS")
+APP_PATH = os.path.dirname(os.path.realpath(__file__))
 MODEL = os.path.join(APP_PATH, "Model", "Werner_Herzog", "Werner_Herzog")
 VOCODER_MODEL = os.path.join(APP_PATH, "Vocoder", "Pretrained", "g_02500000")
 VOCODER_CONFIG = os.path.join(APP_PATH, "Vocoder", "Pretrained", "config.json")
