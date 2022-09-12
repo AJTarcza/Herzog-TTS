@@ -150,5 +150,5 @@ def synthesize(
             
     end_time = time()
     
-    print("Synthesis completed in %s second(s)" % (end_time - start_time))
+    print("Synthesis completed in %s second(s)\n" % (end_time - start_time))
 
