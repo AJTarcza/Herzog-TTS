@@ -1,5 +1,5 @@
-## General info
-This project is a [Werner Herzog](https://en.wikipedia.org/wiki/Werner_Herzog) Text-to-Speech application that features two forms of user interaction, either through a Discord bot or Command Line Interface. 
+# Herzog TTS
+A [Werner Herzog](https://en.wikipedia.org/wiki/Werner_Herzog) Text-to-Speech application that features two forms of user interaction, either through a Discord bot or Command Line Interface. 
 
 ## Acknowledgements
 Voice model training and synthesis were both accomplished using [BenAAndrew's Voice Cloning App](https://github.com/BenAAndrew/Voice-Cloning-App).
