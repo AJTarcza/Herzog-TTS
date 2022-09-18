@@ -7,6 +7,7 @@ numpy==1.22.0
 Pillow==9.2.0
 python-dotenv==0.20.0
 scipy==1.7.3
-torch==1.11.0+cu113
+--extra-index-url https://download.pytorch.org/whl/cu113
+torch==1.11.0
 Unidecode==1.0.22
 pyreadline3==3.4.1
