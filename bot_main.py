@@ -29,7 +29,7 @@ async def on_message(message):
     
     # An empty token list implies an invalid message (i.e. just an attachment) so just skip it
     if(len(tokens) < 1):
-        print("Invalid message received, skipping...")
+        print("Invalid message received, skipping...\n")
         return
     
     # Ignore the message if one of the following conditions is true:
