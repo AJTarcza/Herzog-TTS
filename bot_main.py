@@ -27,7 +27,14 @@ client = discord.Client()
 async def on_message(message):
     tokens = message.content.split()
     
-    # Ignore the message if it isn't relevant
+    # An empty token list implies an invalid message (i.e. just an attachment) so just skip it
+    if(len(tokens) < 1):
+        print("Invalid message received, skipping...")
+        return
+    
+    # Ignore the message if one of the following conditions is true:
+    #   1. The message was sent by a bot
+    #   2. The message was sent in a public server and does not contain the specified prefix
     if(message.author.bot or (message.guild and tokens[0].lower() != PREFIX.lower())):
         return
   
